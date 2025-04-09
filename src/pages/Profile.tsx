@@ -1,4 +1,3 @@
-
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -9,7 +8,8 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { Bell, Film, Heart, ListChecks, LogOut, Mail, Settings, User } from "lucide-react";
+import { Bell, Film, Heart, ListChecks, LogOut, Mail, MessageSquare, Settings, Star, User } from "lucide-react";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 const ProfilePage = () => {
   return (
@@ -49,7 +49,7 @@ const ProfilePage = () => {
           </div>
           
           <Tabs defaultValue="activity">
-            <TabsList className="mb-8 grid grid-cols-2 md:grid-cols-4 lg:flex">
+            <TabsList className="mb-8 grid grid-cols-2 md:grid-cols-5 lg:flex">
               <TabsTrigger value="activity" className="flex gap-2 items-center">
                 <Film className="h-4 w-4" />
                 <span>Activity</span>
@@ -57,6 +57,10 @@ const ProfilePage = () => {
               <TabsTrigger value="favorites" className="flex gap-2 items-center">
                 <Heart className="h-4 w-4" />
                 <span>Favorites</span>
+              </TabsTrigger>
+              <TabsTrigger value="reviews" className="flex gap-2 items-center">
+                <MessageSquare className="h-4 w-4" />
+                <span>Reviews</span>
               </TabsTrigger>
               <TabsTrigger value="watchlist" className="flex gap-2 items-center">
                 <ListChecks className="h-4 w-4" />
@@ -132,6 +136,66 @@ const ProfilePage = () => {
                   </div>
                 ))}
               </div>
+            </TabsContent>
+            
+            <TabsContent value="reviews">
+              <h2 className="text-2xl font-semibold mb-6">Your Reviews</h2>
+              <Card>
+                <CardContent className="p-6">
+                  <div className="space-y-8">
+                    {[
+                      {
+                        id: 1,
+                        filmTitle: "Interstellar",
+                        rating: 4.5,
+                        date: "2023-10-15",
+                        content: "A breathtaking journey through space and time. Nolan delivers a masterpiece that combines scientific concepts with emotional depth."
+                      },
+                      {
+                        id: 2,
+                        filmTitle: "The Godfather",
+                        rating: 5,
+                        date: "2023-09-22",
+                        content: "An absolute classic that defined the gangster genre. The performances, direction, and storytelling are all flawless."
+                      },
+                      {
+                        id: 3,
+                        filmTitle: "Parasite",
+                        rating: 4.8,
+                        date: "2023-08-07",
+                        content: "A brilliant social commentary wrapped in a thrilling story. Bong Joon-ho crafts a perfect blend of genres with unexpected twists."
+                      }
+                    ].map((review) => (
+                      <div key={review.id} className="border rounded-lg p-4 shadow-sm">
+                        <div className="flex justify-between items-start mb-4">
+                          <div>
+                            <h3 className="font-medium text-lg text-primary">{review.filmTitle}</h3>
+                            <div className="flex items-center gap-2 mt-1">
+                              <div className="flex">
+                                {[...Array(5)].map((_, i) => {
+                                  const filled = i < Math.floor(review.rating);
+                                  const half = i === Math.floor(review.rating) && review.rating % 1 !== 0;
+                                  
+                                  if (filled) return <Star key={i} className="h-4 w-4 fill-yellow-500 text-yellow-500" />;
+                                  if (half) return <Star key={i} className="h-4 w-4 fill-yellow-500 text-yellow-500" />;
+                                  return <Star key={i} className="h-4 w-4 text-muted-foreground" />;
+                                })}
+                              </div>
+                              <span className="text-sm text-yellow-500 font-medium">{review.rating.toFixed(1)}</span>
+                            </div>
+                          </div>
+                          <span className="text-sm text-muted-foreground">{new Date(review.date).toLocaleDateString()}</span>
+                        </div>
+                        <p className="text-sm text-muted-foreground">{review.content}</p>
+                        <div className="flex gap-2 mt-4">
+                          <Button variant="outline" size="sm">Edit</Button>
+                          <Button variant="outline" size="sm" className="text-destructive">Delete</Button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
             </TabsContent>
             
             <TabsContent value="watchlist">
