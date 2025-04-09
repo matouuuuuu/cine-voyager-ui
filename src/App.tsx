@@ -11,6 +11,7 @@ import Watchlist from "./pages/Watchlist";
 import Favorites from "./pages/Favorites";
 import ProfilePage from "./pages/Profile";
 import SearchPage from "./pages/Search";
+import Recommendations from "./pages/Recommendations";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/film/:id" element={<FilmDetail />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/recommendations" element={<Recommendations />} />
           <Route path="/watchlist" element={<Watchlist />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/profile" element={<ProfilePage />} />
