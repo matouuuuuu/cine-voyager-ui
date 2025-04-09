@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { SearchInput } from "./ui/search-input";
 import { Button } from "./ui/button";
-import { Heart, Home, ListChecks, LogIn, Menu, Search, ThumbsUp, User, X } from "lucide-react";
+import { Heart, Home, ListChecks, LogIn, Menu, Search, ThumbsUp, User, X, BookOpen } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -22,6 +22,7 @@ export function Navbar() {
     { name: "Home", path: "/", icon: Home },
     { name: "Recommendations", path: "/recommendations", icon: ThumbsUp },
     { name: "Watchlist", path: "/watchlist", icon: ListChecks },
+    { name: "Diary", path: "/diary", icon: BookOpen },
     { name: "Favorites", path: "/favorites", icon: Heart },
     { name: "Profile", path: "/profile", icon: User },
   ];

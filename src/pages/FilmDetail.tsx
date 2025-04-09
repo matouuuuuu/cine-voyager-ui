@@ -8,12 +8,21 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { getFilmById, getRecommendedFilms } from "@/lib/mock-data";
 import { FilmSection } from "@/components/film-section";
-import { Heart, ListChecks, PlayCircle, Star, Clock, Calendar, Film } from "lucide-react";
+import { Heart, ListChecks, PlayCircle, Star, Clock, Calendar, Film, BookOpen } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const FilmDetail = () => {
   const { id } = useParams<{ id: string }>();
   const film = getFilmById(id || "");
   const similarFilms = getRecommendedFilms(); // In a real app, we'd get similar films
+  const { toast } = useToast();
+
+  const handleLogFilm = () => {
+    toast({
+      title: "Film logged successfully",
+      description: `${film?.title} was added to your diary.`,
+    });
+  };
 
   if (!film) {
     return (
@@ -120,6 +129,11 @@ const FilmDetail = () => {
                   <Button variant="outline" className="gap-2">
                     <Heart className="h-5 w-5" />
                     Add to Favorites
+                  </Button>
+                  
+                  <Button variant="outline" className="gap-2" onClick={handleLogFilm}>
+                    <BookOpen className="h-5 w-5" />
+                    Log Film
                   </Button>
                 </div>
               </div>
