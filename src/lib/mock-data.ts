@@ -193,8 +193,8 @@ export const getTrendingFilms = () => {
 };
 
 export const getFeaturedFilm = () => {
-  // In a real app, this would be carefully selected or rotated
-  return mockFilms[0];
+  // Changed to return The Shawshank Redemption instead of Interstellar
+  return mockFilms[1]; // Index 1 is The Shawshank Redemption
 };
 
 export const getFilmById = (id: string) => {
